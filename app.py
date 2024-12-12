@@ -1,11 +1,13 @@
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
-from flask_mysqldb import MySQL  # Para a base de dados
+from flask_mysql_connector import MySQL
 import os, re
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user #Para login
 from werkzeug.security import generate_password_hash, check_password_hash #Para password
 from werkzeug.utils import secure_filename
 from collections import defaultdict
+from dotenv import load_dotenv
+load_dotenv()
 
 
 app = Flask(__name__)
