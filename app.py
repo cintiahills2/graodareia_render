@@ -1,6 +1,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from flask_mysql_connector import MySQL
+from flask_sqlalchemy import SQLAlchemy
 import os, re
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user #Para login
 from werkzeug.security import generate_password_hash, check_password_hash #Para password
@@ -12,6 +13,23 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'PI2024.05'
+
+
+
+
+
+
+
+# Configuração do banco de dados PostgreSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+@app.route('/')
+def home():
+    return "Aplicação conectada ao banco de dados PostgreSQL!"
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
