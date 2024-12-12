@@ -1,0 +1,95 @@
+
+    <!-- Vídeo de fundo para telas maiores -->
+    <video autoplay loop muted playsinline id="background-video-desktop" class="background-video">
+      <source src="{{ url_for('static', filename='videos/background_home.mp4') }}" type="video/mp4">
+      Seu navegador não suporta vídeos HTML5.
+    </video>
+ 
+    <!-- Vídeo de fundo para telas menores (celular) -->
+    <video autoplay loop muted playsinline id="background-video-mobile" class="background-video">
+      <source src="{{ url_for('static', filename='videos/background_mobile.mp4') }}" type="video/mp4">
+      Seu navegador não suporta vídeos HTML5.
+    </video>
+ 
+    {% extends "base.html" %}
+ 
+    {% block title %}Início{% endblock %}
+ 
+    {% block content %}
+    <a href="#menu" class="scroll-down">
+        <i class="bi bi-arrow-down-circle"></i>
+    </a>
+    <style>
+        /* Tela de boas-vindas */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 1); /* Começa branco sólido */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOutBackground 0.5s forwards;
+        }
+ 
+        @keyframes fadeOutBackground {
+            0% {
+                background-color: rgba(255, 255, 255, 1); /* Branco sólido */
+            }
+            100% {
+                background-color: rgba(255, 255, 255, 0); /* Transparente */
+            }
+        }
+ 
+        .welcome-screen img {
+            max-width: 200px;
+            animation: fadeInOut 5s forwards;
+        }
+ 
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+        }
+ 
+        .content-wrapper {
+            display: none; /* Esconde o conteúdo até a tela de boas-vindas desaparecer */
+            opacity: 0; /* Começa invisível */
+            animation: fadeInContent 1s ease forwards;
+            animation-delay: 0.3s; /* Sincroniza com o fim da tela de boas-vindas */
+        }
+ 
+        @keyframes fadeInContent {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Seja Bem-vindo ao Grão d'Areia</h1>
+            <p>O melhor da praia dos Pescadores!</p>
+            <div class="hero-buttons">
+                <a href="/cardapio" class="btn btn-outline-light">Nosso Cardápio</a>
+                <a href="/reservas" class="btn btn-light">
+                    <i class="bi bi-calendar-check"></i> Reservar uma Mesa
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

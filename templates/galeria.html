@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+ 
+{% block title %}Galeria{% endblock %}
+ 
+{% block content %}
+ 
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Fotos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("static/imgs/desktop.png") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+           
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            color: rgb(88, 22, 22);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-auto-rows: 200px; /* Altura base */
+            grid-gap: 15px;
+            padding: 20px;
+        }
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .photo-item:hover {
+            transform: scale(1.05);
+            z-index: 1;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+        }
+       
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 3s ease;
+        }
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        /* Estilos para tamanhos variados */
+        .photo-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        .photo-item.wide {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+        .photo-item.tall {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-auto-rows: 150px;
+            }
+        }
+        .modal {
+                display: none;
+                position: fixed;
+                z-index: 10;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.9);
+                align-items: center;
+                justify-content: center;
+        }
+        .modal-content {
+                margin: auto;
+                display: block;
+                max-width: 700px;
+                max-height: 700px;
+        }
+        .close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #fff;
+                font-size: 40px;
+                cursor: pointer;
+        }
+        .close:hover {
+                color: #fff;
+        }
+        .prev, .next {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                width: auto;
+                padding: 15px;
+                margin-top: -22px;
+                color: #fff;
+                font-weight: bold;
+                font-size: 70px;
+                user-select: none;
+                -webkit-user-select: none;
+                background-color: rgba(0, 0, 0, 0.4);
+                border-radius: 50%;
+        }
+        .prev {
+                left: 15px;
+        }
+        .next {
+                right: 15px;
+        }
+        .prev:hover, .next:hover {
+                background-color: rgba(255, 255, 255, 0.8);
+                color: black;
+                text-decoration:none ;
+        }
+ 
+    </style>
+</head>
+<body>
+    <h1>Galeria de Fotos</h1>
+    <div class="gallery">
+        {% for image in images %}
+        <div href="{{ url_for('static', filename='images/' + image) }}" target="_blank" class="photo-item {% if loop.index % 5 == 0 %}large{% elif loop.index % 3 == 0 %}wide{% elif loop.index % 2 == 0 %}tall{% else %}small{% endif %}">
+            <img src="{{ url_for('static', filename='images/' + image) }}" alt="Foto">
+        </div>
+        
+        {% endfor %}
+    </div>
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+        <a class="next" onclick="changeImage(1)">&#10095;</a>
+    </div>
+    <script>
+        let images = []; // Array de imagens
+        let currentIndex = 0;
+    
+        // Inicializar o modal
+        document.querySelectorAll('.photo-item img').forEach((img, index) => {
+            images.push(img.src); // Salva todas as imagens no array
+            img.addEventListener('click', () => openModal(index)); // Adiciona evento de clique
+        });
+    
+        function openModal(index) {
+            currentIndex = index;
+            document.getElementById("modalImage").src = images[currentIndex];
+            document.getElementById("imageModal").style.display = "flex";
+        }
+    
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = images.length - 1; // Voltar ao último
+            if (currentIndex >= images.length) currentIndex = 0; // Ir para o primeiro
+            document.getElementById("modalImage").src = images[currentIndex];
+        }
+    </script>
+    
+</body>
+</html>
+ 
+{% endblock %}

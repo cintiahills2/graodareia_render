@@ -1,0 +1,81 @@
+<!-- Header para adicionar no final da pagina do cardapio -->
+<header class="custom-header">
+    <nav class="custom-navbar">
+        <a class="custom-navbar-brand" href="/">
+            <!-- tem que ajustar o caminho da imagem do logo. Deixa que eu mudo isso) -->
+            <img src="static\imgs\logo.png" alt="Logo" class="custom-logo">
+        </a>
+        <span class="custom-navbar-toggler-icon"></span>
+        </button>
+        <div class="custom-navbar-collapse">
+            <ul class="custom-navbar-nav">
+                <li class="custom-nav-item"><a class="custom-nav-link" href="/">Início</a></li>
+                <li class="custom-nav-item"><a class="custom-nav-link" href="/cardapio">Cardápio</a></li>
+                <li class="custom-nav-item"><a class="custom-nav-link" href="/reservas">Reservas</a></li>
+                <li class="custom-nav-item"><a class="custom-nav-link" href="/galeria">Galeria</a></li>
+                <li class="custom-nav-item"><a class="custom-nav-link" href="/contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/cardapio.css">
+</head>
+
+{% block content %}
+
+{% if produtos|length > 5 %}
+    
+{% endif %}
+
+<body>
+{% if produtos %}
+
+   <h1> Temos uma variedade incrível de pratos para você escolher!</h1>
+
+    <div class="cardapio-container">
+        <!-- Categoria: Pizzas -->
+        {% for categoria_id, produtos in produtos_por_categoria.items() %} 
+        <div class="categoria">
+            <div class="categoria-left">
+                <h1 class="categoria-titulo">{{ categorias[categoria_id]['nome'] }}</h1>
+                <img src="{{ url_for('static', filename='categoriasImgs/' ~ categorias[categoria_id]['imagem']) }}" alt="{{ categorias[categoria_id]['nome'] }}" class="categoria-img">
+            </div>
+            <div class="categoria-right">
+            {% for produtos in produtos %}
+                <div class="item">
+                    <img src="{{ url_for('static', filename='imgs/produtos/' ~ produtos[4]) }}" alt="Pizza Margherita" class="item-img">
+                    <p class="item-nome">{{ produtos[1] }}</p>
+                    <p class="item-descricao">{{ produtos[2] }}</p>
+                    <p class="item-preco">€ {{ '%.2f' | format(produtos[3]) }}</p>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% if not produtos %}
+<p class="text-center">Desculpe, o cardápio está vazio no momento.</p>
+{% endif %}
+
+{% endblock %}
+
+<footer class="footer text-center">
+    <div class="footerH1">
+    <p>&copy; 2024 Grão d'areia. Todos os direitos reservados.</p>
+    </div>
+    <div class="footerH2">
+            Designed by F.C team&copy;
+    </div>
+    <div class="admin-icon">
+    <a href="/admin" title="Acesso à página de admin">
+                🔒
+    </a>
+    </div>
+    </footer>

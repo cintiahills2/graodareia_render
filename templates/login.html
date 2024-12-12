@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+<style>
+    .login-pag{
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 80vh;
+    }
+</style>
+<div class="login-pag">
+    <h2>Login de Administrador</h2>
+    <form method="POST">
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <div>
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" id="senha" required>
+        </div>
+        <button type="submit">Entrar</button>
+    </form>
+</div>
+    <!-- Mostrar mensagens de erro -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}

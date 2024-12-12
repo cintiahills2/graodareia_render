@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Contate-nos{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contacto.css') }}">
+
+<div class="contacto-container">
+   <div> <h1 class="titulo-contacto text-center">Contacte-nos</h1>
+    <p class="descricao-contacto text-center">
+        A tua opnião é muito importante para nós!
+    </p>
+    <div class="info-cards">
+        <div class="info-card">
+            <i class="icon-phone">&#9742;</i>
+            <p>Telefone:</p>
+            <p>+351 000 000 000</p>
+        </div>
+        <div class="info-card">
+            <i class="icon-location">&#127969;</i>
+            <p>Morada:</p>
+            <p>Av. 1 de Maio 56, 2825-369 Costa da Caparica, Portugal</p>
+        </div>
+        <div class="info-card">
+            <i class="icon-email">&#9993;</i>
+            <p>Correio eletronico:</p>
+            <p>contacto@graodareia.pt</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.1238!2d-9.2000949!3d38.5751382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1eb5380fcace3d%3A0xb1cebcf7df68e861!2sGr%C3%A3o%20d%E2%80%99Areia%20Fonte%20da%20Telha!5e0!3m2!1spt-PT!2spt!4v1700000000000" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+        <div class="form-container">
+            <h2>Deixe-nos uma mensagem</h2>
+            <form method="POST" action="/contacto">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensagem">Mensagem:</label>
+                    <textarea id="mensagem" class="form-control" name="mensagem" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn-enviar">Enviar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

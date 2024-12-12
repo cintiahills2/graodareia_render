@@ -1,0 +1,299 @@
+/* Estilo geral */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('/static/imgs/cardapio.png') no-repeat center / cover; 
+    position: relative;
+}
+h1 {
+    font-family: 'Poppins', sans-serif;
+    color:white;
+    text-shadow: 2px 2px 4px rgb(88, 22, 22);
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 70px;
+
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.305); /* Define a opacidade de 50% */
+    z-index: -1; /* Garante que o conteúdo do body fique acima */
+}
+
+.custom-header {
+    background-color: transparent; /* Fundo transparente */
+    border-bottom: none; /* Sem linha divisória */
+    padding: 10px 20px;
+    transition: background-color 0.3s ease; /* Transição suave para mudança de cor */
+}
+
+/* Navbar */
+.custom-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: transparent;
+    transition: background-color 0.3s;
+    
+}
+
+.custom-navbar-brand {
+    text-decoration: none;
+    font-weight: bold;
+    color: #a52727;
+}
+
+.custom-logo {
+    height: 50px; /* Ajuste o tamanho vertical */
+    width: auto; /* Mantém a proporção da imagem */
+    display: block; /* Garante que seja tratado como bloco */
+    margin: 0; /* Remove margens extras */
+    padding: 0; /* Remove paddings */
+    transition: transform 0.3s ease; /* Suaviza transformações */
+    margin-right:25px;
+}
+
+.custom-logo:hover {
+    transform: scale(1.1); /* Efeito de zoom suave no hover */
+}
+
+.custom-navbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.custom-nav-item {
+    margin-right: 20px;
+    position: relative; /* Para manipular a linha inferior */
+
+}
+
+.custom-nav-link {
+    text-decoration: none;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em; /* Tamanho maior para legibilidade */
+    font-weight: 700; /* Negrito mais forte */
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.993); /* Sombra sutil */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transições suaves */
+    display: inline-block;
+    top: 5px; 
+  
+}
+
+/* Efeito de linha inferior animada no hover */
+.custom-nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: rgba(88, 22, 22, 0.8); /* Linha dourada no hover */
+    transition: width 0.3s ease;
+}
+
+.custom-nav-link:hover::after {
+    width: 100%; /* Expande a linha inferior */
+}
+
+.cardapio-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+/* Categoria */
+.categoria {
+    display: flex;
+    flex-direction: column; /* Imagem da categoria em cima e itens abaixo */
+    align-items: center;
+    gap: 20px;
+}
+
+/* Parte esquerda da categoria */
+.categoria-left {
+    text-align: center;
+}
+
+.categoria-titulo {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.categoria-img {
+    width: 95%; /* Aumenta a largura para ocupar quase toda a tela */
+    max-width: 1200px; /* Limita a largura máxima */
+    width:1000px;
+    height: 400px; /* Mantém a altura fixa */
+    border-radius: 10px;
+    object-fit: cover; /* Mantém a proporção da imagem */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Parte direita da categoria */
+.categoria-right {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Define 4 colunas no desktop */
+    gap: 30px; /* Espaço ajustado entre os itens */
+    justify-items: center; /* Centraliza os itens no grid */
+}
+
+/* Itens */
+.item {
+    width: 220px;
+    height: 220px; /* Itens quadrados maiores */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+}
+
+.item-img {
+    width: 120px; /* Tamanho fixo maior para imagens dentro dos itens */
+    height: 120px;
+    object-fit: cover; /* Garante proporções consistentes */
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.item-nome {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+}
+
+.item-descricao {
+    font-size: 12px;
+    color: #ccc;
+    margin: 5px 0 0 0;
+}
+
+.item-preco {
+    font-size: 14px;
+    font-weight: bold;
+    color: #f39c12;
+    margin-top: 5px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .categoria-img {
+        width: 1000px; /* Ajusta a largura da imagem */
+        max-width: 1000px;
+        height: 250px; /* Altura ajustada no celular */
+    }
+
+    .categoria-right {
+        grid-template-columns: repeat(3, 1fr); /* Ajusta o grid para 3 colunas em telas médias */
+    }
+
+    .item {
+        width: 200px;
+        height: 200px; /* Itens ajustados para telas médias */
+    }
+
+    .item-img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .categoria {
+        align-items: center; /* Garante alinhamento central no celular */
+    }
+
+    .categoria-img {
+        width: 1000px; /* Ajusta a largura da imagem */
+        max-width: 1000px;
+        height: 250px; /* Altura ajustada no celular */
+    }
+
+    .categoria-right {
+        grid-template-columns: repeat(2, 1fr); /* Ajusta o grid para 2 colunas no celular */
+    }
+
+    .item {
+        width: 180px;
+        height: 180px;
+    }
+
+    .item-img {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categoria-right {
+        grid-template-columns: repeat(1, 1fr); /* Ajusta o grid para uma coluna em telas muito pequenas */
+        gap: 20px; /* Ajusta o espaço entre os itens no celular */
+    }
+
+    .item {
+        width: 250px; /* Itens maiores no celular */
+        height: 250px;
+    }
+
+    .item-img {
+        width: 120px; /* Ajusta o tamanho da imagem dentro do item */
+        height: 120px;
+    }
+}
+
+.footer {
+    background: rgba(88, 22, 22, 0.8);
+    text-shadow: 2px 2px 4px black;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.admin-icon {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+.admin-icon a {
+    color: #fff;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    font-size: 18px;
+    text-decoration: none;
+}
+.admin-icon a:hover {
+    opacity: 1;
+    text-decoration:none ;
+}

@@ -1,0 +1,299 @@
+/* global.css */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    height: 100%;
+    opacity: 0; /* Inicialmente invisível */
+    animation: fadeIn 1.5s ease-in-out forwards; /* Aparecer suavemente */
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+/* Estrutura para garantir o footer fixo no final */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    background-color: transparent;
+    transition: background-color 0.3s;
+    border-bottom: 2px solid #ddd;
+}
+.navbar.bg-light {
+    background-color: rgba(0, 0, 0, 0.0) !important; /* Fundo transparente */
+    border-bottom: none !important; /* Remove a linha divisória */
+}
+.navbar-light .navbar-nav .nav-link {
+    color: black !important;
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7); /* Sombra mais destacada no hover */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #a52727;
+}
+.navbar-brand img {
+    height: 50px; /* Ajuste o tamanho vertical */
+    width: auto; /* Mantém a proporção da imagem */
+    display: block; /* Garante que seja tratado como bloco */
+    margin: 0; /* Remove margens extras */
+    padding: 0; /* Remove paddings */
+    transition: transform 0.3s ease; /* Suaviza transformações */
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.1); /* Aumenta o logotipo ao passar o mouse */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.2em; /* Tamanho maior para legibilidade */
+    font-weight: 700; /* Negrito mais forte */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Sombra sutil para contraste */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transições suaves */
+    padding: 0.5em 1em; /* Espaçamento adequado */
+}
+
+.navbar-nav .nav-link:hover {
+    color: rgba(88, 22, 22, 0.8); /* Dourado suave no hover */
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.7); /* Sombra mais destacada no hover */
+}
+
+/* Efeito de linha inferior animada no hover */
+.navbar-nav .nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: rgba(88, 22, 22, 0.8); /* Dourado para linha inferior */
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%; /* Expande a linha no hover */
+}
+
+/* Footer */
+.footer {
+    background: rgba(88, 22, 22, 0.8);
+    text-shadow: 2px 2px 4px black;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footerH1 {
+    font-size: 15px;
+}
+
+.footerH2 {
+    font-size: 10px;
+}
+
+.admin-icon {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+.admin-icon a {
+    color: #fff;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    font-size: 18px;
+    text-decoration: none;
+}
+.admin-icon a:hover {
+    opacity: 1;
+}
+
+/* Links no footer */
+.footer a {
+    color: var(--default-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--accent-color);
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: #333;
+    margin: 20px 0;
+}
+
+/* Botões */
+.hero-buttons a {
+    background: rgba(88, 22, 22, 0.8);
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    color: #fff;
+}
+
+.hero-buttons a:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+/* Vídeo de fundo */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Conteúdo sobre o vídeo */
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero Content */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.hero-content h1, .hero-content p {
+    font-family: 'Poppins', sans-serif; /* Fonte do botão aplicada ao texto */
+    color: rgb(88, 22, 22);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8); /* Sombra mais sutil */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95); /* Movimento e leve zoom */
+    animation: fadeInUp 1.5s ease forwards;
+}
+
+.hero-content h1 {
+    font-size: 48px; /* Aumentado para destacar */
+    font-weight: 700; /* Negrito */
+    animation-delay: 0.5s;
+}
+
+.hero-content p {
+    font-size: 22px; /* Maior para legibilidade */
+    font-weight: 400; /* Regular */
+    animation-delay: 0.7s;
+}
+
+/* Animação */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Ajustes na Navbar para Responsividade */
+.navbar .navbar-brand {
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5em;
+}
+
+.navbar-toggler {
+    margin-right: 1em;
+}
+
+
+/* Footer Fixado no Final em Telas Menores */
+.footer {
+    background: rgba(88, 22, 22, 0.8);
+    text-shadow: 2px 2px 4px black;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-top: auto;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+    /* Ajustes para o Footer */
+    .footer {
+        background-color: rgba(88, 22, 22, 0.8);
+        text-shadow: 2px 2px 4px black;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        margin-top: auto; /* Empurra o footer para o fim */
+    }
+
+/* Vídeo de fundo desktop (telas maiores) */
+#background-video-desktop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    display: block;
+}
+
+/* Vídeo de fundo mobile (telas menores) */
+#background-video-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    display: none;
+}
+
+/* Responsividade: troca de vídeo para telas menores */
+@media (max-width: 768px) {
+    #background-video-desktop {
+        display: none;
+    }
+
+    #background-video-mobile {
+        display: block;
+    }
+}
