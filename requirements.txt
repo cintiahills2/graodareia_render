@@ -11,3 +11,4 @@ flask-mysql-connector
 mysqlclient==2.2.0
 python-dotenv
 gunicorn
+flask_sqlalchemy
