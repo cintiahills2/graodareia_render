@@ -29,9 +29,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 @app.route('/bd')
-def home():
+def bd_status():
     return "Aplicação conectada ao banco de dados PostgreSQL!"
-
 
 login_manager = LoginManager()
 login_manager.init_app(app)
