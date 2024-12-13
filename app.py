@@ -28,7 +28,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-@app.route('/')
+@app.route('/bd')
 def home():
     return "Aplicação conectada ao banco de dados PostgreSQL!"
 
