@@ -10,6 +10,8 @@ from collections import defaultdict
 from dotenv import load_dotenv
 load_dotenv()
 
+print("DB Config:", os.getenv('DB_USER'), os.getenv('DB_PASSWORD'), os.getenv('DB_HOST'), os.getenv('DB_PORT'), os.getenv('DB_NAME'))
+
 
 app = Flask(__name__)
 app.secret_key = 'PI2024.05'
