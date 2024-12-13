@@ -7,8 +7,11 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash #Para password
 from werkzeug.utils import secure_filename
 from collections import defaultdict
+import psycopg2  # Certifique-se de que a biblioteca está no requirements.txt
 from dotenv import load_dotenv
+
 load_dotenv()
+
 
 print("DB Config:", os.getenv('DB_USER'), os.getenv('DB_PASSWORD'), os.getenv('DB_HOST'), os.getenv('DB_PORT'), os.getenv('DB_NAME'))
 
@@ -28,9 +31,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-@app.route('/bd')
-def bd_status():
-    return "Aplicação conectada ao banco de dados PostgreSQL!"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -423,6 +423,41 @@ def galeria():
     images.sort()
 
     return render_template('galeria.html', images=images)
+
+
+
+def importar_sql():
+    try:
+        # Configurações de conexão com o banco de dados
+        conn = psycopg2.connect(
+            host=os.getenv('DB_HOST'),
+            port=os.getenv('DB_PORT'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD'),
+            dbname=os.getenv('DB_NAME')
+        )
+        cur = conn.cursor()
+
+        # Caminho do arquivo SQL
+        sql_file_path = "restaurante_bd.sql"  # Certifique-se de que o arquivo está na mesma pasta do app.py
+
+        # Ler o arquivo SQL e executar os comandos
+        with open(sql_file_path, 'r') as sql_file:
+            sql_script = sql_file.read()
+            cur.execute(sql_script)
+            conn.commit()
+            print("Arquivo SQL importado com sucesso!")
+
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print(f"Erro ao importar o arquivo SQL: {e}")
+
+importar_sql()
+
+@app.route('/bd')
+def bd_status():
+    return "Aplicação conectada ao banco de dados PostgreSQL!"
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
